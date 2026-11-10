@@ -1,0 +1,51 @@
+
+<section id="contact" class="container mt-5 g-5 content" animate.enter="apparition">
+  <div class="row">
+  <h1>Contact</h1>
+    <div class="col-md-11 pe-11 content">
+      <p class="fade-up">Si vous souhaitez me contacter pour discuter d'une opportunité professionnelle, d'une collaboration ou simplement pour échanger des idées, n'hésitez pas à remplir le formulaire ci-dessous. Je serai ravi de vous répondre dans les plus brefs délais.</p>
+      @if(contactForm) {
+      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="sendEmail()">
+        <label for="name">Name</label>
+        <input id="name" class="form-control mt-2 mb-3" placeholder="Your Name" formControlName="from_name" required
+        />
+        @if(f['from_name']?.invalid && f['from_name']?.touched){
+        <div class="text-danger">
+          @if(f['from_name']?.errors?.['required']){
+            <small>Nom requis</small>
+          }
+        </div>
+        }
+
+        <label for="email">Email</label>
+        <input id="email" type="email" class="form-control mt-2 mb-3" placeholder="Your Email" formControlName="user_email" required
+        />
+        @if(f['user_email']?.invalid && f['user_email']?.touched){
+        <div class="text-danger">
+          @if(f['user_email']?.errors?.['required']){
+            <small>Email requis</small>
+          }
+          @if(f['user_email']?.errors?.['email']){
+            <small>Email invalide</small>
+          }
+        </div>
+      }
+        <label for="message">Message</label>
+        <textarea id="message" class="form-control mt-2 mb-3" placeholder="Your Message" formControlName="message" required></textarea>
+        @if(f['message']?.invalid && f['message']?.touched){
+        <div class="text-danger">
+          @if(f['message']?.errors?.['required']){
+            <small>Message requis</small>
+          }
+        </div>
+      }
+      <input 
+        type="submit" 
+        [value]="isSending ? 'Sending...' : 'Send'"
+        [disabled]="contactForm.invalid || isSending"
+      >
+    </form>
+  }
+    </div>
+  </div>
+</section>

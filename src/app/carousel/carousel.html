@@ -1,0 +1,12 @@
+
+<div class="slider">
+  <div class="arrow left" (click)="goToPreviousSlide()"><</div>
+  <div class="arrow right" (click)="goToNextSlide()">></div>
+  <div class="slides-overflow">
+    <div class="slides-container" [ngStyle]="slidesContainerStyle()"> 
+      @for (slide of slides(); track $index){
+        <div class="slide" [ngStyle]="getSlideStyle(slide)"></div>
+      } 
+    </div>
+  </div>
+</div>
